@@ -6,7 +6,6 @@
 [[servers]]
 # Ldap server host (specify multiple hosts space separated)
 #host = "127.0.0.1"
-host = "aplic.ldapbb.bb.com.br"
 # Default port is 389 or 636 if use_ssl = true
 port = 389
 # Set to true if ldap server supports TLS
@@ -27,7 +26,6 @@ bind_dn = "uid=wasadmin,ou=bind,ou=usuarios,ou=acesso,o=bb,c=br"
 # Search user bind password
 # If the password contains # or ; you have to wrap it with triple quotes. Ex """#password;"""
 #bind_password = 'grafana'
-bind_password = '08371963'
 
 # User search filter, for example "(cn=%s)" or "(sAMAccountName=%s)" or "(uid=%s)"
 #search_filter = "(cn=%s)"
