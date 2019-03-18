@@ -47,17 +47,3 @@ docker run --rm -dt --net prometheus -h grafana --name grafana -v /usr/aplic/arg
 
 ## Status <a name="status"></a>
 Em desenvolvimento
-
-### Autor <a name="autor"></a>
-- ahmcosta@bb.com.br
-- dirnazario@bb.com.br
-- dpostai@bb.com.br
-- flaviane@bb.com.br
-- mtesser@bb.com.br
-
-### Mantenedores <a name="mant"></a>
-- ahmcosta@bb.com.br
-- dirnazario@bb.com.br
-- dpostai@bb.com.br
-- flaviane@bb.com.br
-- mtesser@bb.com.br
