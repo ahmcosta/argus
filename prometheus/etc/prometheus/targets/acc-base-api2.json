@@ -1,0 +1,10 @@
+[ 
+  {
+    "targets": [ "172.17.222.141:8002" ],
+    "labels": {
+      "env": "homologacao",
+      "job": "java",
+      "solucao": "plataforma_bb"
+    }
+  }
+]

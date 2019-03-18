@@ -1,0 +1,32 @@
+[
+ {
+   "targets": [
+	"https://172.17.232.157:43001/mov-centralizador/tela/Configuracao/ping",
+	"https://172.17.232.157:43002/mov-centralizador/tela/Configuracao/ping",
+	"https://172.17.232.157:43003/mov-centralizador/tela/Configuracao/ping",
+	"https://172.17.232.157:43004/mov-centralizador/tela/Configuracao/ping",
+	"https://172.17.232.157:43005/mov-centralizador/tela/Configuracao/ping",
+	"https://172.17.232.157:43006/mov-centralizador/tela/Configuracao/ping",
+	"https://172.17.232.157:43007/mov-centralizador/tela/Configuracao/ping",
+	"https://172.17.232.157:43008/mov-centralizador/tela/Configuracao/ping",
+	"https://172.17.232.157:43009/mov-centralizador/tela/Configuracao/ping",
+	"https://172.17.232.157:43010/mov-centralizador/tela/Configuracao/ping",
+	"https://172.17.232.157:43011/mov-centralizador/tela/Configuracao/ping",
+	"https://172.17.232.157:43012/mov-centralizador/tela/Configuracao/ping",
+	"https://172.17.232.157:43013/mov-centralizador/tela/Configuracao/ping",
+	"https://172.17.232.157:43014/mov-centralizador/tela/Configuracao/ping",
+	"https://172.17.232.157:43015/mov-centralizador/tela/Configuracao/ping",
+	"https://172.17.232.157:43016/mov-centralizador/tela/Configuracao/ping",
+	"https://172.17.232.157:43017/mov-centralizador/tela/Configuracao/ping",
+	"https://172.17.232.157:43018/mov-centralizador/tela/Configuracao/ping",
+	"https://172.17.232.157:43019/mov-centralizador/tela/Configuracao/ping",
+	"https://172.17.232.157:43020/mov-centralizador/tela/Configuracao/ping"
+    ],
+    "labels": {
+      "module": "http_200_mobile",
+      "env": "mobile-blue-cct1-producao",
+      "job": "blackbox",
+      "hostname": "pxl1movpf006"
+    }
+  }
+]

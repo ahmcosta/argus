@@ -1,0 +1,13 @@
+[
+ {
+   "targets": [
+        "tcp://172.20.54.33:6379"
+    ],
+    "labels": {
+      "module": "tcp_horus_redis",
+      "env": "horus_redis_producao",
+      "job": "blackbox",
+      "hostname": "pxl1nia30002"
+    }
+  }
+]

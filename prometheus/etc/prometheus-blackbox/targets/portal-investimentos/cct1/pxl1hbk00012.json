@@ -1,0 +1,25 @@
+[
+ {
+   "targets": [ 
+	"https://172.17.215.234:43000/resource/monitores/statusInstancia",
+	"https://172.17.215.234:43001/resource/monitores/statusInstancia",
+	"https://172.17.215.234:43002/resource/monitores/statusInstancia",
+	"https://172.17.215.234:43003/resource/monitores/statusInstancia",
+	"https://172.17.215.234:43004/resource/monitores/statusInstancia",
+	"https://172.17.215.234:43005/resource/monitores/statusInstancia",
+	"https://172.17.215.234:43006/resource/monitores/statusInstancia",
+	"https://172.17.215.234:43007/resource/monitores/statusInstancia",
+	"https://172.17.215.234:43008/resource/monitores/statusInstancia",
+	"https://172.17.215.234:43009/resource/monitores/statusInstancia",
+	"https://172.17.215.234:43010/resource/monitores/statusInstancia",
+	"https://172.17.215.234:43011/resource/monitores/statusInstancia",
+	"https://172.17.215.234:43012/resource/monitores/statusInstancia"
+    ],
+    "labels": {
+      "module": "http_200_investimentos",
+      "env": "investimentos_cct1_producao",
+      "job": "blackbox",
+      "hostname": "pxl1hbk00012"
+    }
+  }
+]

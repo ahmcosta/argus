@@ -1,0 +1,110 @@
+version: '2.0'
+
+services:
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - /usr/aplic/argus/prometheus/etc/prometheus:/etc/prometheus
+      - /var/lib/container/argus/prometheus/data:/data
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/data'
+    ports:
+      - 9090:9090
+    restart: always
+    networks:
+      - argus
+
+  prometheus-blackbox:
+    image: prom/prometheus
+    volumes:
+      - /usr/aplic/argus/prometheus/etc/prometheus-blackbox:/etc/prometheus
+      - /var/lib/container/argus/blackbox/data:/data
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/data'
+      - '--web.enable-admin-api'
+    depends_on:
+      - blackbox-exporter
+    ports:
+      - 9092:9090
+    restart: always
+    networks:
+      - argus
+
+#  prometheus-blackbox-tcp:
+#    image: prom/prometheus
+#    volumes:
+#      - /usr/aplic/argus/prometheus/etc/prometheus-blackbox-tcp:/etc/prometheus
+#      - /var/lib/container/argus/blackbox/data-tcp:/data
+#    command:
+#      - '--config.file=/etc/prometheus/prometheus.yml'
+#      - '--storage.tsdb.path=/data'
+#    depends_on:
+#      - blackbox-exporter
+#    ports:
+#      - 9098:9090
+#    restart: always
+#    networks:
+#      - argus
+
+  alertmanager:
+    image: prom/alertmanager
+    volumes:
+      - /usr/aplic/argus/alertmanager/etc/alertmanager:/etc/alertmanager
+      - /var/lib/container/argus/alertmanager/data:/data
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
+      - '--storage.path=/data'
+    depends_on:
+      - prometheus
+    ports:
+      - 9093:9093
+      - 5001:5001
+    networks:
+      - argus
+
+  grafana:
+    image: grafana/grafana
+    volumes:
+      - /usr/aplic/argus/grafana/etc/grafana:/etc/grafana
+      - /usr/aplic/argus/grafana/var/lib/grafana:/var/lib/grafana
+      - /usr/aplic/argus/grafana/usr/share/grafana:/usr/share/grafana
+    depends_on:
+      - alertmanager
+    ports:
+      - 3000:3000
+    networks:
+      - argus
+
+  blackbox-exporter:
+    image: prom/blackbox-exporter
+    volumes:
+      - /usr/aplic/argus/exporters/blackbox/etc/blackbox:/etc/blackbox_exporter
+    command:
+      - '--config.file=/etc/blackbox_exporter/config.yml'
+    ports:
+      - 9115:9115
+    restart: always
+    networks:
+      - argus
+
+#  blackbox-exporter-tcp:
+#    image: prom/blackbox-exporter
+#    volumes:
+#      - /usr/aplic/argus/exporters/blackbox-tcp/etc/blackbox:/etc/blackbox_exporter
+#    command:
+#      - '--config.file=/etc/blackbox_exporter/config.yml'
+#    ports:
+#      - 9116:9115
+#    restart: always
+#    networks:
+#      - argus
+
+networks:
+  argus:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.200.0/24  

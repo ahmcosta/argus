@@ -1,0 +1,10 @@
+[
+  {
+    "targets": [ "172.17.222.206:8005/wls-exporter" ],
+    "labels": {
+      "env": "teste_exporter",
+      "job": "wls_exporter",
+      "hostname": "exl1lnxdsk7be2"
+    }
+  }
+]

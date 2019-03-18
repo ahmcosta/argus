@@ -1,0 +1,25 @@
+groups:
+- name: Regras de alerta 
+  rules:  
+  - alert: Instância inacessível
+    expr: up == 0
+    for: 5s
+    labels:
+      severity: page
+    annotations:
+      summary: "A instância {{ $labels.instance }} está inacessível."
+      description: "A instância {{ $labels.instance }} do job {{ $labels.job }} está inacessível."
+
+  - alert: Alto consumo de CPU
+    expr: avg without (cpu)(irate(node_cpu_seconds_total{job="nodes",mode!="idle",mode="user"}[1m])) * 100 > 50.0
+    for: 5s
+    annotations:
+      summary: "A instância {{ $labels.instance }} está com alto consumo de CPU."
+      description: "A instância {{ $labels.instance }} do job {{ $labels.job }} está com consumo de CPU superior a 50.0%."
+
+  - alert: Alto consumo de Filesystem
+    expr: 100 - (100 * node_filesystem_avail_bytes{fstype!='rootfs',mountpoint!~'/(run).*',mountpoint!=''} / node_filesystem_size_bytes{fstype!='rootfs',mountpoint!~'/(run).*',mountpoint!=''}) > 50.0
+    for: 5s
+    annotations:
+      summary: "O servidor {{ $labels.hostname }} está com alto consumo de Filesystem."
+      description: "A instância {{ $labels.hostname }} está com consumo de FS {{ $labels.mount }} superior a 50.0%."

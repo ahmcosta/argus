@@ -1,0 +1,11 @@
+[
+  {
+    "targets": [ "172.24.4.186:9001" ],
+    "labels": {
+      "env": "plt_bb_prod",
+      "job": "node",
+      "hostname": "pxl0plata055"
+#      "inst": gaw
+    }
+  }
+]

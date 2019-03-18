@@ -1,0 +1,10 @@
+[
+  {
+    "targets": [ "172.17.104.47:9144" ],
+    "labels": {
+      "env": "bb-mapfre_producao",
+      "job": "node",
+      "hostname": "pxl0extws003"
+    }
+  }
+]

@@ -1,0 +1,11 @@
+[ 
+  {
+    "targets": [ "172.17.222.121:8001" ],
+    "labels": {
+      "env": "homologa",
+      "job": "java",
+      "solucao": "plataforma_bb",
+      "application": "cca"
+    }
+  }
+]

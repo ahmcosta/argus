@@ -1,0 +1,10 @@
+[
+  {
+    "targets": [ "172.17.215.125:9144" ],
+    "labels": {
+      "env": "portal_investimentos_producao",
+      "job": "node",
+      "hostname": "pxl1hbk00002"
+    }
+  }
+]

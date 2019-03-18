@@ -1,0 +1,12 @@
+groups:
+- name: Regras de alerta de probe de URL
+  rules:
+  - alert: URLMatchFail
+    expr: ((probe_success != 0) or (probe_http_status_code != 200) or (probe_failed_due_to_regex != 0)) != 1
+    for: 10s
+    labels:
+      severity: critical
+    annotations:
+      summary: "A instância {{ $labels.hostname }} está com conteúdo diferente do esperado (OK)."
+      description: "A instância {{ $labels.hostname }} está com conteúdo diferente do esperado (OK)."
+      documentation: "https://ci.bb.com.br/novo/index.php/SOLU%C3%87%C3%83O:TI/BOTBB/Incidentes/NIA103"

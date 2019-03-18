@@ -1,0 +1,41 @@
+groups:
+- name: Regras de alerta 
+  rules:  
+  - alert: InstanciaDown
+    expr: up == 0
+    for: 10s
+    labels:
+      severity: critical
+    annotations:
+      summary: "A instância {{ $labels.instance }} está inacessível."
+      description: "A instância {{ $labels.instance }} do job {{ $labels.job }} está inacessível por mais de 5 minutos."
+
+  - alert: AltoConsumoCPU
+    expr: avg without (cpu)(irate(node_cpu_seconds_total{mode!="idle",mode="user"}[1m])) * 100 > 95.0
+    for: 10s
+    labels:
+      severity: critical
+    annotations:
+      summary: "A instância {{ $labels.instance }} está com alto consumo de CPU (> 80.0%)."
+      description: "A instância {{ $labels.instance }} do job {{ $labels.job }} está com consumo de CPU superior a 95.0% por mais de 10 minutos."
+      documentation: "https://ci.bb.com.br/novo/index.php/SOLU%C3%87%C3%83O:TI/BOTBB/Incidentes/NIA101" 
+
+  - alert: AltoConsumoFS
+    expr: 100 - (100 * node_filesystem_avail_bytes{fstype!='rootfs',mountpoint!~'/(run).*',mountpoint!=''} / node_filesystem_size_bytes{fstype!='rootfs',mountpoint!~'/(run).*',mountpoint!=''}) > 90.0
+    for: 10s
+    labels:
+      severity: warning
+    annotations:
+      summary: "O servidor {{ $labels.hostname }} está com alto consumo de Filesystem (> 50.0%)."
+      description: "A instância {{ $labels.hostname }} está com consumo de FS {{ $labels.mount }} superior a 90.0% por mais de 10 minutos."
+      documentation: "https://ci.bb.com.br/novo/index.php/SOLU%C3%87%C3%83O:TI/BOTBB/Incidentes/NIA102"
+
+  - alert: AltoConsumoMem
+    expr: (100 * (node_memory_MemTotal_bytes - node_memory_MemFree_bytes - node_memory_Buffers_bytes - node_memory_Cached_bytes) / node_memory_MemTotal_bytes) > 85.0
+    for: 10s
+    labels:
+      severity: warning
+    annotations:
+      summary: "O servidor {{ $labels.hostname }} está com alto consumo de Memória (> 50.0%)."
+      description: "A instância {{ $labels.hostname }} está com consumo de Memória {{ $labels.mount }} superior a 85.0% por mais de 10 minutos."
+      documentation: "https://ci.bb.com.br/novo/index.php/SOLU%C3%87%C3%83O:TI/BOTBB/Incidentes/NIA103"

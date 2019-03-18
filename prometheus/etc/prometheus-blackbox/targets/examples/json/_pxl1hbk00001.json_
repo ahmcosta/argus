@@ -1,0 +1,24 @@
+[
+  {
+    "targets": [ 
+	"https://172.17.215.123:43000/resource/monitores/statusInstancia",
+	"https://172.17.215.123:43001/resource/monitores/statusInstancia",
+        "https://172.17.215.123:43002/resource/monitores/statusInstancia",
+        "https://172.17.215.123:43003/resource/monitores/statusInstancia",
+        "https://172.17.215.123:43004/resource/monitores/statusInstancia",
+        "https://172.17.215.123:43005/resource/monitores/statusInstancia",
+        "https://172.17.215.123:43006/resource/monitores/statusInstancia",
+        "https://172.17.215.123:43007/resource/monitores/statusInstancia",
+        "https://172.17.215.123:43008/resource/monitores/statusInstancia",
+        "https://172.17.215.123:43009/resource/monitores/statusInstancia",
+        "https://172.17.215.123:43010/resource/monitores/statusInstancia",
+        "https://172.17.215.123:43011/resource/monitores/statusInstancia",
+        "https://172.17.215.123:43012/resource/monitores/statusInstancia",
+    ],
+    "labels": {
+      "env": "investimentos_producao",
+      "job": "blackbox",
+      "hostname": "pxl1hbk000001"
+    }
+  }
+]

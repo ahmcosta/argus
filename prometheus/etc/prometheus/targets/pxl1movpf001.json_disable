@@ -1,0 +1,10 @@
+[
+  {
+    "targets": [ "172.17.232.68:9144" ],
+    "labels": {
+      "env": "mobile_pf_producao",
+      "job": "node",
+      "hostname": "pxl1movpf001"
+    }
+  }
+]

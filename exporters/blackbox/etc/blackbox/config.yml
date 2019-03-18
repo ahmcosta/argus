@@ -1,0 +1,38 @@
+modules:
+# Investimentos ###########################
+  http_200_investimentos:
+    prober: http
+    timeout: 30s
+    http:
+      method: GET
+      no_follow_redirects: true
+      fail_if_body_not_matches_regexp:
+        - "OK"
+      tls_config:
+        insecure_skip_verify: true
+      preferred_ip_protocol: "ip4"
+# Investimentos - FIM #####################
+
+# Mobile ##################################
+  http_200_mobile:
+    prober: http
+    timeout: 30s
+    http:
+      method: GET
+      no_follow_redirects: true
+      fail_if_body_not_matches_regexp:
+        - "OK"
+      tls_config:
+        insecure_skip_verify: true
+      preferred_ip_protocol: "ip4"
+# Mobile - FIM ############################
+
+# Hórus (redis) ###########################
+  tcp_horus_redis:
+    prober: tcp
+    timeout: 1m
+    tcp:
+      preferred_ip_protocol: "ip4"
+      tls_config:
+        insecure_skip_verify: true
+# Hórus (redis) - FIM #####################

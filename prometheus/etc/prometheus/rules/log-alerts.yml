@@ -1,0 +1,12 @@
+groups:
+- name: Regras de alerta de logs
+  rules:
+  - alert: AltoHTTP500
+    expr: grok_access_http_status_code{http_status_code="500"} > 10.0
+    for: 10s
+    labels:
+      severity: critical
+    annotations:
+      summary: "O servidor {{ $labels.hostname }} está com alto retorno de erro HTTP 500 (> 10)."
+      description: "A instância {{ $labels.hostname }} está com alta quantidade de erro HTTP 500 {{ $labels.mount }} superior a 10 por mais de 10 minutos."
+      documentation: "https://ci.bb.com.br/novo/index.php/SOLU%C3%87%C3%83O:TI/BOTBB/Incidentes/NIA103"

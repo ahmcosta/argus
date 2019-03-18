@@ -1,0 +1,112 @@
+version: '2.0'
+
+services:
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - /usr/aplic/argus/prometheus/etc/prometheus:/etc/prometheus
+      - /var/lib/container/argus/prometheus/data:/data
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/data'
+    ports:
+      - 9090:9090
+    restart: always
+    networks:
+      - argus
+
+  prometheus-blackbox:
+    image: prom/prometheus
+    volumes:
+      - /usr/aplic/argus/prometheus/etc/prometheus-blackbox:/etc/prometheus
+      - /var/lib/container/argus/blackbox/data:/data
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/data'
+      - '--web.enable-admin-api'
+    depends_on:
+      - blackbox-exporter
+    ports:
+      - 9092:9090
+    restart: always
+    networks:
+      - argus
+
+  alertmanager:
+    image: prom/alertmanager
+    volumes:
+      - /usr/aplic/argus/alertmanager/etc/alertmanager:/etc/alertmanager
+      - /var/lib/container/argus/alertmanager/data:/data
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
+      - '--storage.path=/data'
+    depends_on:
+      - prometheus
+    ports:
+      - 9093:9093
+      - 5001:5001
+    networks:
+      - argus
+
+  grafana:
+    image: grafana/grafana
+    volumes:
+      - /usr/aplic/argus/grafana/etc/grafana:/etc/grafana
+      - /usr/aplic/argus/grafana/var/lib/grafana:/var/lib/grafana
+      - /usr/aplic/argus/grafana/usr/share/grafana:/usr/share/grafana
+    depends_on:
+      - alertmanager
+    ports:
+      - 3000:3000
+    networks:
+      - argus
+
+  blackbox-exporter:
+    image: prom/blackbox-exporter
+    restart: always
+    volumes:
+      - /usr/aplic/argus/exporters/blackbox/etc/blackbox:/etc/blackbox_exporter
+    command:
+      - '--config.file=/etc/blackbox_exporter/config.yml'
+    ports:
+      - 9115:9115
+    networks:
+      - argus
+
+  promgem-redis:
+    image: redis
+    restart: always
+    volumes:
+      - /var/lib/container/argus/promgem/redis/data:/data
+    entrypoint: redis-server --appendonly yes
+    ports:
+      - 6379:6379
+    networks:
+      - argus
+
+  promgem-mysql:
+    image: mysql
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: argus
+      MYSQL_DATABASE: argus
+      MYSQL_USER: argus
+      MYSQL_PASSWORD: argus
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    volumes:
+    - /var/lib/container/argus/promgem/var/lib/mysql:/var/lib/mysql 
+    networks:
+      - argus
+
+networks:
+  argus:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.200.0/24  

@@ -1,0 +1,11 @@
+[ 
+  {
+    "targets": [ "172.24.5.115:8001" ],
+    "labels": {
+      "env": "producao",
+      "job": "java",
+      "solucao": "plataforma_bb",
+      "application": "acc-base-api"
+    }
+  }
+]

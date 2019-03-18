@@ -1,0 +1,12 @@
+groups:
+ - name: Regras de alerta de verificação expiração de certificado 
+   rules:
+     - alert: CertificadoExpiracaoMenor30
+       expr: round((probe_ssl_earliest_cert_expiry{job="blackbox"} - time()) / 86400) < 150
+       for: 10s
+       labels:
+         severity: critical
+       annotations:
+         summary: "{{ $value }} restantes para o vencimento do certificado."
+         description: "Certificado do Endpoint {{ $labels.instance }} está com vencimento inferior a 30 dias ({{ $value }} dias restantes)."
+         documentation: "https://ci.bb.com.br/novo/index.php/SOLU%C3%87%C3%83O:TI/BOTBB/Incidentes/NIA103"

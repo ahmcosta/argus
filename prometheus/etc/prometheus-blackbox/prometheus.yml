@@ -1,0 +1,36 @@
+global:
+ scrape_interval: 10s
+ scrape_timeout: 10s
+ evaluation_interval: 10s
+
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+       - alertmanager:9093
+
+rule_files:
+  - "rules/http-alerts.yml"
+  - "rules/cert-alerts.yml"
+  - "rules/tcp-alerts.yml"
+
+scrape_configs:
+ - job_name: 'blackbox'
+   metrics_path: /probe
+   file_sd_configs: 
+    - files: [ 
+        'targets/portal-investimentos/cct1/*.json'
+      , 'targets/mobile/blue/cct1/*.json'
+      , 'targets/horus/cct1/*.json'
+      ]
+   relabel_configs:
+     - source_labels: [module]
+       target_label: __param_module
+     - source_labels: [__address__]
+       regex: (^(tcp|udp):\/\/)?(.*)
+       target_label: __param_target
+       replacement: ${3} # Regex criada por F0968601 - Antonio Henrique para retirar os protocolos de camada de transporte (tcp|udp) https://regex101.com/r/cSH9Ex/1
+     - source_labels: [__param_target]
+       target_label: instance
+     - target_label: __address__
+       replacement: 10.8.5.177:9115  # blackbox exporter

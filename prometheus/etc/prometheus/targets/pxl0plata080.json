@@ -1,0 +1,10 @@
+[ 
+  {
+    "targets": [ "172.24.4.15:9100", "172.24.4.15:9144" ],
+    "labels": {
+      "env": "plt_bb_piloto",
+      "job": "node",
+      "hostname": "pxl0plata080"
+    }
+  }
+]
